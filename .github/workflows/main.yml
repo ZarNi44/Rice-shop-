@@ -1,0 +1,21 @@
+name: Build APK
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Build Android
+        run: |
+          cd artifacts/mobile
+          npm install
+          npx eas-cli build --platform android --profile preview --local --non-interactive --output=../../ZarniRiceShop.apk
+      - uses: actions/upload-artifact@v3
+        with:
+          name: ZarniRiceShop-APK
+          path: ZarniRiceShop.apk
