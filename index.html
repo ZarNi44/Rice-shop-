@@ -2,39 +2,69 @@
 <html lang="my">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ဆန်ဆိုင် မှတ်တမ်းစနစ်</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Zarni ဆန်မှတ်တမ်း</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="ဆန်ဆိုင်မှတ်တမ်း">
+    
     <style>
-        * { box-sizing: border-box; font-family: sans-serif; }
-        body { background-color: #f7f9fa; margin: 0; padding: 15px; }
-        .container { max-width: 480px; margin: 0 auto; background: white; padding: 20px; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
-        h2 { text-align: center; color: #ff9800; margin-top: 0; font-size: 22px; }
-        .tabs { display: flex; background: #f0f0f2; padding: 4px; border-radius: 12px; margin-bottom: 20px; }
-        .tab-btn { flex: 1; padding: 12px; border: none; background: transparent; font-size: 14px; font-weight: bold; border-radius: 10px; cursor: pointer; }
-        .tab-btn.active { background: white; color: #ff9800; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
-        .form-group { margin-bottom: 16px; }
-        label { display: block; margin-bottom: 6px; font-weight: bold; color: #444; font-size: 14px; }
-        input, select { width: 100%; padding: 12px; border: 1px solid #e0e0e0; border-radius: 10px; font-size: 16px; background: #fafafa; }
-        input:focus, select:focus { border-color: #ff9800; outline: none; background: white; }
+        * { box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+        body { background-color: #fcfbfa; margin: 0; padding: 16px; color: #333; }
+        .container { max-width: 480px; margin: 0 auto; background: white; padding: 24px; border-radius: 20px; box-shadow: 0 8px 24px rgba(0,0,0,0.04); }
+        
+        /* Replit Header Style */
+        .header { text-align: center; margin-bottom: 24px; }
+        .header h2 { color: #e28743; margin: 0 0 4px 0; font-size: 24px; font-weight: bold; }
+        .header p { color: #8e8e93; margin: 0; font-size: 13px; }
+        
+        /* Replit Top Navigation Tabs */
+        .tabs { display: flex; background: #eeded1; padding: 4px; border-radius: 12px; margin-bottom: 24px; gap: 4px; }
+        .tab-btn { flex: 1; padding: 10px; border: none; background: transparent; font-size: 14px; font-weight: bold; border-radius: 9px; cursor: pointer; color: #6e6e73; transition: 0.2s; }
+        .tab-btn.active { background: white; color: #333; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+        
+        /* Form Layout */
+        .form-group { margin-bottom: 18px; }
+        .form-group.half { flex: 1; }
+        label { display: block; margin-bottom: 8px; font-weight: 600; color: #4a4a4a; font-size: 14px; }
+        
+        /* Replit Input & Select Styles */
+        input, select { width: 100%; padding: 12px 16px; border: 1px solid #e5e5ea; border-radius: 12px; font-size: 15px; background: #fafafa; color: #333; transition: 0.2s; -webkit-appearance: none; }
+        input:focus, select:focus { border-color: #e28743; background: white; outline: none; }
+        select { background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path fill='%238e8e93' d='M0 0l5 5 5-5z'/></svg>"); background-repeat: no-repeat; background-position: right 16px center; }
         .row { display: flex; gap: 12px; }
-        .row .form-group { flex: 1; }
-        .btn { width: 100%; padding: 14px; background: #ff9800; color: white; border: none; border-radius: 10px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 10px; transition: 0.2s; }
-        .btn:active { transform: scale(0.98); }
+        
+        /* Replit Orange Button */
+        .btn { width: 100%; padding: 14px; background: #e28743; color: white; border: none; border-radius: 12px; font-size: 15px; font-weight: bold; cursor: pointer; margin-top: 12px; box-shadow: 0 4px 12px rgba(226,135,67,0.2); transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .btn:active { transform: scale(0.98); opacity: 0.9; }
+        
+        /* Settings Page Layout */
         .page { display: none; }
         .page.active { display: block; }
-        .item-list { margin-top: 15px; max-height: 200px; overflow-y: auto; border: 1px solid #eee; border-radius: 10px; }
-        .list-item { display: flex; justify-content: space-between; align-items: center; padding: 12px; border-bottom: 1px solid #eee; background: #fff; }
-        .del-btn { background: #ff5252; color: white; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 12px; }
+        .settings-section { background: #fafafa; padding: 16px; border-radius: 14px; margin-bottom: 20px; border: 1px solid #f0f0f0; }
+        .settings-section h3 { margin-top: 0; font-size: 15px; color: #e28743; margin-bottom: 12px; }
+        
+        /* Item Lists with Delete Buttons */
+        .item-list { max-height: 160px; overflow-y: auto; border: 1px solid #eee; border-radius: 10px; background: white; margin-top: 10px; }
+        .list-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; border-bottom: 1px solid #f5f5f5; font-size: 14px; }
+        .list-item:last-child { border-bottom: none; }
+        .del-btn { background: #ff453a; color: white; border: none; padding: 4px 10px; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: bold; }
+        
+        /* Helper Text style */
+        .help-text { font-size: 12px; color: #8e8e93; margin-top: 4px; display: block; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2>🌾 ဆန်ဆိုင် စာရင်းချုပ်စနစ်</h2>
+    <div class="header">
+        <h2>🌾 ဆန်ဆိုင် မှတ်တမ်း</h2>
+        <p>နေ့စဉ် အဝင်/အထွက် စာရင်းသွင်းရန်</p>
+    </div>
     
     <div class="tabs">
-        <button class="tab-btn active" onclick="switchTab('input-page')">📋 စာရင်းသွင်းရန်</button>
-        <button class="tab-btn" onclick="switchTab('settings-page')">⚙️ ဆန်အမည်များ ပြင်ရန်</button>
+        <button class="tab-btn active" onclick="switchTab('input-page')">📋 စာရင်းသွင်း</button>
+        <button class="tab-btn" onclick="switchTab('settings-page')">⚙️ ဆန်/နေရာ ပြင်ရန်</button>
     </div>
 
     <div id="input-page" class="page active">
@@ -46,147 +76,277 @@
         <div class="form-group">
             <label>လုပ်ငန်းအမျိုးအစား</label>
             <select id="type">
-                <option>ကုန်ဝင် (ကားချ)</option>
-                <option>ကုန်ထွက် (ကားတင်)</option>
+                <option value="ရွေးချယ်ပါ">ရွေးချယ်ပါ</option>
+                <option value="ကုန်ဝင် (ကားချ)">ကုန်ဝင် (ကားချ)</option>
+                <option value="ကုန်ထွက် (ကားတင်)">ကုန်ထွက် (ကားတင်)</option>
             </select>
         </div>
 
+        <div class="form-group">
+            <label>ဖောက်သည်/နေရာ</label>
+            <select id="location">
+                <option value="ရွေးချယ်ပါ">ရွေးချယ်ပါ</option>
+            </select>
+            <span class="help-text">နေရာများ tab မှ ကြိုတင် ထည့်ထားနိုင်ပါသည်။</span>
+        </div>
+
         <div class="row">
-            <div class="form-group">
+            <div class="form-group half">
                 <label>ဆန်အစုအဖွဲ့</label>
-                <select id="group" onchange="updateRiceDropdown()"></select>
+                <select id="group" onchange="updateRiceDropdown()">
+                    <option value="ရွေးချယ်ပါ">ရွေးချယ်ပါ</option>
+                </select>
             </div>
-            <div class="form-group">
+            <div class="form-group half">
                 <label>ဆန်အမည်</label>
-                <select id="rice-name"></select>
+                <select id="rice-name">
+                    <option value="ရွေးချယ်ပါ">ရွေးချယ်ပါ</option>
+                </select>
             </div>
         </div>
 
         <div class="row">
-            <div class="form-group">
+            <div class="form-group half">
                 <label>အိတ်ရေ</label>
-                <input type="number" id="bags" placeholder="၁၅၀">
+                <input type="text" id="bags" placeholder="၁၅၀">
             </div>
-            <div class="form-group">
+            <div class="form-group half">
                 <label>ကားနံပါတ်</label>
                 <input type="text" id="truck" placeholder="3B/1234">
             </div>
         </div>
 
-        <button class="btn" onclick="shareReport()">Viber / Messenger သို့ ပို့ရန်</button>
+        <button class="btn" onclick="shareReport()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4z"/></svg>
+            Viber / Messenger သို့ ပို့ရန်
+        </button>
     </div>
 
     <div id="settings-page" class="page">
-        <div class="form-group">
-            <label>ဘယ်အုပ်စုထဲ ထည့်မလဲ?</label>
-            <select id="new-group">
-                <option value="ပေါ်ဆန်းအစုအဖွဲ့">ပေါ်ဆန်းအစုအဖွဲ့</option>
-                <option value="ဧည့်မထအစုအဖွဲ့">ဧည့်မထအစုအဖွဲ့</option>
-            </select>
+        
+        <div class="settings-section">
+            <h3>📍 ဖောက်သည်/နေရာအသစ် ထည့်ရန်</h3>
+            <div class="row" style="margin-bottom: 0;">
+                <input type="text" id="new-location-name" placeholder="ဥပမာ - မန္တလေးပွဲရုံ" style="flex: 2;">
+                <button class="btn" style="margin-top:0; background:#4caf50; font-size:13px; flex:1;" onclick="addLocation()">ထည့်ရန်</button>
+            </div>
+            <div id="location-list" class="item-list"></div>
         </div>
-        <div class="form-group">
-            <label>ဆန်အမည်သစ်</label>
-            <input type="text" id="new-name" placeholder="ဥပမာ - ရွှေဘိုပေါ်ဆန်း">
-        </div>
-        <button class="btn" style="background: #4caf50;" onclick="addRice()">➕ ဆန်အမည်သစ် သိမ်းရန်</button>
 
-        <label style="margin-top: 20px;">လက်ရှိ ဆန်အမျိုးအစားများ</label>
-        <div id="rice-list" class="item-list"></div>
+        <div class="settings-section">
+            <h3>📂 ဆန်အစုအဖွဲ့အသစ် ထည့်ရန်</h3>
+            <div class="row" style="margin-bottom: 0;">
+                <input type="text" id="new-group-name" placeholder="ဥပမာ - ပေါ်ဆန်းအစုအဖွဲ့" style="flex: 2;">
+                <button class="btn" style="margin-top:0; background:#4caf50; font-size:13px; flex:1;" onclick="addGroup()">ထည့်ရန်</button>
+            </div>
+            <div id="group-list" class="item-list"></div>
+        </div>
+
+        <div class="settings-section">
+            <h3>🌾 ဆန်အမည်သစ် ထည့်ရန်</h3>
+            <div class="form-group" style="margin-bottom: 8px;">
+                <select id="target-group-select">
+                    </select>
+            </div>
+            <div class="row" style="margin-bottom: 0;">
+                <input type="text" id="new-rice-name" placeholder="ဥပမာ - ကျားပျံ" style="flex: 2;">
+                <button class="btn" style="margin-top:0; background:#4caf50; font-size:13px; flex:1;" onclick="addRiceName()">ထည့်ရန်</button>
+            </div>
+            <div id="rice-names-list" class="item-list"></div>
+        </div>
+        
     </div>
 </div>
 
 <script>
-    let defaultData = {
-        'ပေါ်ဆန်းအစုအဖွဲ့': ['ကျားပျံ', 'တောင်ပျံ', 'ဧရာပေါ်ဆန်း'],
-        'ဧည့်မထအစုအဖွဲ့': ['ရက်ကိုးဆယ်', 'သုခ', 'ဆင်းသွယ်']
+    // ကနဦး ဒေတာတည်ဆောက်ပုံ (Local Storage ဖြင့် ဖုန်းထဲတွင် အမြဲသိမ်းထားမည်)
+    let appData = {
+        locations: ['မန္တလေးပွဲရုံ', 'ရန်ကုန်သိုလှောင်ရုံ'],
+        groups: ['ပေါ်ဆန်းအစုအဖွဲ့', 'ဧည့်မထအစုအဖွဲ့'],
+        riceMenu: {
+            'ပေါ်ဆန်းအစုအဖွဲ့': ['ကျားပျံ', 'တောင်ပျံ', 'ဧရာပေါ်ဆန်း'],
+            'ဧည့်မထအစုအဖွဲ့': ['ရက်ကိုးဆယ်', 'သုခ', 'ဆင်းသွယ်']
+        }
     };
 
-    if(!localStorage.getItem('riceData')) {
-        localStorage.setItem('riceData', JSON.stringify(defaultData));
+    if(!localStorage.getItem('riceShopStorage')) {
+        localStorage.setItem('riceShopStorage', JSON.stringify(appData));
     }
 
+    // Date Auto Picker set to Today
     document.getElementById('date').valueAsDate = new Date();
 
-    function getData() { return JSON.parse(localStorage.getItem('riceData')); }
+    function getStorage() { return JSON.parse(localStorage.getItem('riceShopStorage')); }
+    function saveStorage(data) { localStorage.setItem('riceShopStorage', JSON.stringify(data)); }
 
     function switchTab(pageId) {
         document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
         document.getElementById(pageId).classList.add('active');
         event.currentTarget.classList.add('active');
-        if(pageId === 'settings-page') { renderSettings(); } else { initDropdowns(); }
+        
+        if(pageId === 'settings-page') { renderSettingsLists(); } else { initMainDropdowns(); }
     }
 
-    function initDropdowns() {
-        const data = getData();
+    // Main Page Dropdowns Initialize
+    function initMainDropdowns() {
+        const data = getStorage();
+        
+        // 1. Locations
+        const locSel = document.getElementById('location');
+        locSel.innerHTML = '<option value="ရွေးချယ်ပါ">ရွေးချယ်ပါ</option>';
+        data.locations.forEach(l => { locSel.innerHTML += `<option value="${l}">${l}</option>`; });
+        
+        // 2. Groups
         const groupSel = document.getElementById('group');
-        groupSel.innerHTML = '';
-        Object.keys(data).forEach(g => {
-            groupSel.innerHTML += `<option value="${g}">${g}</option>`;
-        });
-        updateRiceDropdown();
+        groupSel.innerHTML = '<option value="ရွေးချယ်ပါ">ရွေးချယ်ပါ</option>';
+        data.groups.forEach(g => { groupSel.innerHTML += `<option value="${g}">${g}</option>`; });
+        
+        // 3. Reset Rice Name
+        document.getElementById('rice-name').innerHTML = '<option value="ရွေးချယ်ပါ">ရွေးချယ်ပါ</option>';
     }
 
     function updateRiceDropdown() {
-        const data = getData();
-        const g = document.getElementById('group').value;
-        const nameSel = document.getElementById('rice-name');
-        nameSel.innerHTML = '';
-        if(data[g]) {
-            data[g].forEach(n => { nameSel.innerHTML += `<option value="${n}">${n}</option>`; });
+        const data = getStorage();
+        const selectedGroup = document.getElementById('group').value;
+        const riceSel = document.getElementById('rice-name');
+        riceSel.innerHTML = '<option value="ရွေးချယ်ပါ">ရွေးချယ်ပါ</option>';
+        
+        if(data.riceMenu[selectedGroup]) {
+            data.riceMenu[selectedGroup].forEach(r => {
+                riceSel.innerHTML += `<option value="${r}">${r}</option>`;
+            });
         }
     }
 
-    function addRice() {
-        const g = document.getElementById('new-group').value;
-        const n = document.getElementById('new-name').value.trim();
-        if(!n) return alert('ဆန်အမည် ရိုက်ပါဗျာ');
-        let data = getData();
-        if(!data[g].includes(n)) {
-            data[g].push(n);
-            localStorage.setItem('riceData', JSON.stringify(data));
-            document.getElementById('new-name').value = '';
-            renderSettings();
+    // --- Settings Logics ---
+    function addLocation() {
+        let name = document.getElementById('new-location-name').value.trim();
+        if(!name) return;
+        let data = getStorage();
+        if(!data.locations.includes(name)) {
+            data.locations.push(name);
+            saveStorage(data);
+            document.getElementById('new-location-name').value = '';
+            renderSettingsLists();
         }
     }
 
-    function deleteRice(g, n) {
-        let data = getData();
-        data[g] = data[g].filter(i => i !== n);
-        localStorage.setItem('riceData', JSON.stringify(data));
-        renderSettings();
+    function deleteLocation(name) {
+        let data = getStorage();
+        data.locations = data.locations.filter(l => l !== name);
+        saveStorage(data);
+        renderSettingsLists();
     }
 
-    function renderSettings() {
-        const data = getData();
-        const list = document.getElementById('rice-list');
-        list.innerHTML = '';
-        Object.keys(data).forEach(g => {
-            data[g].forEach(n => {
-                list.innerHTML += `<div class="list-item"><span>[${g}] ${n}</span><button class="del-btn" onclick="deleteRice('${g}','${n}')">ဖျက်ရန်</button></div>`;
+    function addGroup() {
+        let name = document.getElementById('new-group-name').value.trim();
+        if(!name) return;
+        let data = getStorage();
+        if(!data.groups.includes(name)) {
+            data.groups.push(name);
+            data.riceMenu[name] = []; // create empty array for new group
+            saveStorage(data);
+            document.getElementById('new-group-name').value = '';
+            renderSettingsLists();
+        }
+    }
+
+    function deleteGroup(name) {
+        let data = getStorage();
+        data.groups = data.groups.filter(g => g !== name);
+        delete data.riceMenu[name];
+        saveStorage(data);
+        renderSettingsLists();
+    }
+
+    function addRiceName() {
+        let group = document.getElementById('target-group-select').value;
+        let name = document.getElementById('new-rice-name').value.trim();
+        if(!name || !group) return alert('ဆန်အုပ်စု ရွေးချယ်ပြီး ဆန်အမည်ရိုက်ထည့်ပါဗျာ');
+        let data = getStorage();
+        if(!data.riceMenu[group].includes(name)) {
+            data.riceMenu[group].push(name);
+            saveStorage(data);
+            document.getElementById('new-rice-name').value = '';
+            renderSettingsLists();
+        }
+    }
+
+    function deleteRiceName(group, name) {
+        let data = getStorage();
+        data.riceMenu[group] = data.riceMenu[group].filter(r => r !== name);
+        saveStorage(data);
+        renderSettingsLists();
+    }
+
+    function renderSettingsLists() {
+        const data = getStorage();
+        
+        // 1. Render Locations List
+        const locList = document.getElementById('location-list');
+        locList.innerHTML = '';
+        data.locations.forEach(l => {
+            locList.innerHTML += `<div class="list-item"><span>${l}</span><button class="del-btn" onclick="deleteLocation('${l}')">ဖျက်ရန်</button></div>`;
+        });
+
+        // 2. Render Groups List & Target Dropdown
+        const gList = document.getElementById('group-list');
+        const targetGroupSel = document.getElementById('target-group-select');
+        gList.innerHTML = '';
+        targetGroupSel.innerHTML = '';
+        data.groups.forEach(g => {
+            gList.innerHTML += `<div class="list-item"><span>${g}</span><button class="del-btn" onclick="deleteGroup('${g}')">ဖျက်ရန်</button></div>`;
+            targetGroupSel.innerHTML += `<option value="${g}">${g}</option>`;
+        });
+
+        // 3. Render Rice Names List
+        const rList = document.getElementById('rice-names-list');
+        rList.innerHTML = '';
+        Object.keys(data.riceMenu).forEach(g => {
+            data.riceMenu[g].forEach(r => {
+                rList.innerHTML += `<div class="list-item"><span><strong>[${g}]</strong> ${r}</span><button class="del-btn" onclick="deleteRiceName('${g}','${r}')">ဖျက်ရန်</button></div>`;
             });
         });
     }
 
+    // Send Report Data
     function shareReport() {
         const date = document.getElementById('date').value;
         const type = document.getElementById('type').value;
+        const location = document.getElementById('location').value;
         const group = document.getElementById('group').value;
         const name = document.getElementById('rice-name').value;
         const bags = document.getElementById('bags').value;
         const truck = document.getElementById('truck').value;
 
-        const text = `📝 **ဆန်ဆိုင် - နေ့စဉ် စာရင်းချုပ်**\n📅 **ရက်စွဲ:** ${date}\n\n🔹 **လုပ်ငန်း:** ${type}\n🌾 **ဆန်အမျိုးအစား:** [${group}] ${name}\n📦 **အိတ်ရေ:** ${bags} အိတ်\n🚚 **ကားနံပါတ်:** ${truck}\n\n_Report generated by RiceShop App_`;
+        if(type === "ရွေးချယ်ပါ" || location === "ရွေးချယ်ပါ" || group === "ရွေးချယ်ပါ" || name === "ရွေးချယ်ပါ") {
+            alert("ကျေးဇူးပြု၍ အချက်အလက်များ အကုန်ရွေးချယ်ပေးပါဗျာ။");
+            return;
+        }
+
+        const text = `📝 **ဆန်ဆိုင် - နေ့စဉ် စာရင်းချုပ်**\n📅 **ရက်စွဲ:** ${date}\n\n🔹 **လုပ်ငန်း:** ${type}\n📍 **ဖောက်သည်/နေရာ:** ${location}\n🌾 **ဆန်အမျိုးအစား:** [${group}] ${name}\n📦 **အိတ်ရေ:** ${bags} အိတ်\n🚚 **ကားနံပါတ်:** ${truck}\n\n_Report generated by RiceShop App_`;
 
         if (navigator.share) {
             navigator.share({ title: 'ဆန်ဆိုင် စာရင်းချုပ်', text: text });
         } else {
             navigator.clipboard.writeText(text);
-            alert('စာရင်းချုပ်ကို Copy ကူးပြီးပါပြီ။ Viber တွင် Paste ချပို့နိုင်ပါပြီ။');
+            alert('စာရင်းချုပ်ကို Copy ကူးပြီးပါပြီ။ Viber သို့မဟုတ် Messenger တွင် ဖိချ (Paste) ပြီး ပို့နိုင်ပါပြီ။');
         }
     }
 
-    initDropdowns();
+    // PWA Offline Service Worker Code
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('data:text/javascript;base64,' + btoa(`
+            const cacheName = 'rice-shop-v2';
+            const assets = ['./', 'index.html'];
+            self.addEventListener('install', e => { e.waitUntil(caches.open(cacheName).then(cache => cache.addAll(assets))); });
+            self.addEventListener('fetch', e => { e.respondWith(caches.match(e.request).then(res => res || fetch(e.request))); });
+        `), { scope: './' });
+    }
+
+    initMainDropdowns();
 </script>
+
 </body>
 </html>
