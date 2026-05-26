@@ -1,0 +1,33 @@
+name: Build Android APK
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🏗 Checkout repository
+        uses: actions/checkout@v3
+
+      - name: ⚙️ Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: 📦 Install dependencies
+        run: |
+          cd artifacts/mobile
+          npm install
+
+      - name: 🚀 Build APK Locally (No Token Needed)
+        run: |
+          cd artifacts/mobile
+          # Expo Token မလိုဘဲ Local စနစ်ဖြင့် တိုက်ရိုက် .apk ဆောက်ခြင်း
+          npx eas-cli build --platform android --profile preview --local --non-interactive --output=../../ZarniRiceShop.apk
+
+      - name: 📥 Upload APK Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: ZarniRiceShop-APK
+          path: ZarniRiceShop.apk
